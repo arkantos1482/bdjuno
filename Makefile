@@ -92,3 +92,11 @@ format:
 clean:
 	rm -f tools-stamp ./build/**
 .PHONY: clean
+
+DB_URL="postgres://app:junohasuraapp@172.22.15.7:5432/bdjuno?sslmode=disable"
+DB_PATH=./database/schema
+migrate_up:
+	migrate -path ${DB_PATH} -database ${DB_URL} up
+
+migrate_down:
+	migrate -path ${DB_PATH} -database ${DB_URL} down 1
