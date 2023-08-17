@@ -93,7 +93,9 @@ clean:
 	rm -f tools-stamp ./build/**
 .PHONY: clean
 
-DB_URL="postgres://app:junohasuraapp@172.22.15.7:5432/bdjuno?sslmode=disable"
+include .env
+export
+DB_URL="postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:5432/${DB_NAME}?sslmode=disable"
 DB_PATH=./database/schema
 migrate_up:
 	migrate -path ${DB_PATH} -database ${DB_URL} up
